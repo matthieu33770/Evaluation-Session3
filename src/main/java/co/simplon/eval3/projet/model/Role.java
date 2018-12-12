@@ -34,4 +34,20 @@ public class Role implements Serializable{
 		this.fonction = fonction;
 	}	
 	
+	public void setFunction(String fonction) {
+		this.fonction = fonction;
+	}
+	
+	public void setId(long id) {
+		this.idRole = id;
+	}
+
+	public long getIdRole() {
+		return idRole;
+	}
+
+	public String getFonction() {
+		return fonction;
+	}
+	
 }

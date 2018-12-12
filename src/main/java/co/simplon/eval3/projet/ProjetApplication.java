@@ -1,5 +1,10 @@
 package co.simplon.eval3.projet;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +23,9 @@ public class ProjetApplication implements CommandLineRunner{
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetApplication.class, args);
@@ -26,17 +34,16 @@ public class ProjetApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		//mise à zero des tables
-		//userRepository.deleteAllInBatch();
-		//roleRepository.deleteAllInBatch();
 
-		
-		//Cretion role
-		Role r1 = new Role("tech");
 		//Creation user
-		User u1 = new User("toto", "test", "ooo@mm.p", r1);
+		List<Role> roles = roleRepository.findAll();
+		Role admin = roles.get(0);
+		Role user = roles.get(1);
+		User u1 = new User("toto", "test", "ooo@mm.p", admin);
+		User u2 = new User("test1", "toto", "aaa@mm.p", user);
 		
-		roleRepository.save(r1);
 		userRepository.save(u1);
+		userRepository.save(u2);
+		
 	}
 }

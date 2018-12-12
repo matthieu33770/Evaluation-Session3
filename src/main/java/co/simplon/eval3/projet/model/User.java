@@ -1,5 +1,6 @@
 package co.simplon.eval3.projet.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,13 +42,12 @@ public class User implements Serializable{
 	@Column(name = "email")
 	private String email;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_role")
 	private Role habilitation;
 
 	public User(@Size(max = 100) String prenom, @Size(max = 100) String nom, @Size(max = 255) String email,
 			Role habilitation) {
-		super();
 		this.prenom = prenom;
 		this.nom = nom;
 		this.email = email;
