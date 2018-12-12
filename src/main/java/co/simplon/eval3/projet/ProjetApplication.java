@@ -16,8 +16,8 @@ import co.simplon.eval3.projet.repository.RoleRepository;
 import co.simplon.eval3.projet.repository.UserRepository;
 
 @SpringBootApplication
-public class ProjetApplication implements CommandLineRunner{
-	
+public class ProjetApplication {//implements CommandLineRunner{
+	/*
 	@Autowired
 	private RoleRepository roleRepository;
 	
@@ -26,11 +26,11 @@ public class ProjetApplication implements CommandLineRunner{
 	
 	@PersistenceContext
 	private EntityManager em;
-
+	*/
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetApplication.class, args);
 	}
-
+	/*
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -45,5 +45,5 @@ public class ProjetApplication implements CommandLineRunner{
 		userRepository.save(u1);
 		userRepository.save(u2);
 		
-	}
+	}*/
 }
