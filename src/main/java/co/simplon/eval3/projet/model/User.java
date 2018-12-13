@@ -13,31 +13,29 @@ import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 
-
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
+public class User implements Serializable {
 
-	//default serial
+	// default serial
 	private static final long serialVersionUID = 1L;
-	
+
 	public User() {
-		super();
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_users")
 	private long id;
-	
+
 	@Size(max = 100)
 	@Column(name = "prenom")
 	private String prenom;
-	
+
 	@Size(max = 100)
 	@Column(name = "nom")
 	private String nom;
-	
+
 	@Size(max = 255)
 	@Column(name = "email")
 	private String email;
@@ -54,7 +52,19 @@ public class User implements Serializable{
 		this.habilitation = habilitation;
 	}
 
-	
-	
-	
+	public String getNom() {
+		return this.nom;
+	};
+	public String getPrenom(){
+		return this.prenom;
+	};
+
+	public String getEmail() {
+		return this.email;
+	};
+
+	public Role getHabilitation() {
+		return this.habilitation;
+	};
+
 }
