@@ -3,8 +3,10 @@ const logInChoice = document.getElementById("logIn")
 const logInContextHtml = document.getElementById("logInContext")
 const signInContextHtml = document.getElementById("signInContext")
 const userContextHtml = document.getElementById("alert-success")
+const tableContextHtml = document.getElementById("userTable")
 
 let isAuthenticated = false;
+let table = $('#usersTable').DataTable();
 
 logInChoice.addEventListener("click", logInContext)
 signInChoice.addEventListener("click", signInContext)
@@ -33,6 +35,7 @@ function logInContext() {
     console.log("starting logInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
+    tableContextHtml.style.display = "none"
     logInContextHtml.style.display = "block"
     console.log("logInContext load ")
 
@@ -42,6 +45,7 @@ function signInContext() {
     console.log("starting signInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
+    tableContextHtml.style.display = "none"
     signInContextHtml.style.display = "block"
     console.log("signInContext load ")
 
@@ -57,10 +61,33 @@ function userContext() {
     setTimeout(() => {
         userContextHtml.style.display = "none"
     },3000)
-    
+    getUsers()
+    tableContextHtml.style.display = "block"
     console.log("authContext load ")
-   
+}
 
+function getUsers(){
+	$('#usersTable').DataTable({
+		"columnDefs": [
+	            {
+	                "targets": [ 0 ],
+	                "sortable" : false
+	            },
+	            {
+	                "targets": [ 3 ],
+	                "visible": true
+	            }
+	        ],
+		"ajax" : {
+			url : '/home/isAdmin',
+			dataSrc : ''
+		},
+		"columns" : [ 
+			{"data" : "prenom"},
+			{"data" : "nom"}, 
+			{"data" : "email"},
+			{"data" : "habilitation"} ]
+	});
 }
 
 function isLoging() {
