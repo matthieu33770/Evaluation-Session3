@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjetApplication<Evaluation-Session3>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "co.simplon.eval3.projet.ProjetApplication",
+            "projectName": "Evaluation-Session3",
+            "args": ""
+        }
+    ]
+}

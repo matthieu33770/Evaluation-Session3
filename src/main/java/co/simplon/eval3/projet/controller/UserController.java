@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.simplon.eval3.projet.model.Role;
 import co.simplon.eval3.projet.model.User;
+import co.simplon.eval3.projet.repository.RoleRepository;
 import co.simplon.eval3.projet.repository.UserRepository;
 
 /**
@@ -27,6 +28,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private RoleRepository roleRepo;
 
     @GetMapping("/{nom}")
     public ResponseEntity<?> findOneByName(@PathVariable String nom) {
@@ -54,24 +57,26 @@ public class UserController {
     public ResponseEntity<?> isExisting(@PathVariable String email) {
 
         List<User> users = null;
+        List<Role> role = null;
+        role = roleRepo.findAll();
         users = userRepo.findByemail(email);
         if (users.size() <= 0) {
             System.out.println("error: email don't exist");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        // make a trigger with js
+
         return ResponseEntity.status(HttpStatus.CREATED).body(users);
 
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User user) {
+        System.out.println("etape1" + user);
         User incomingUser = null ;
         String nom = user.getNom();
         String prenom = user.getPrenom();   
         String email = user.getEmail();
-        Role habilitation = user.getHabilitation();
-    
+        //Role habilitation = user.getHabilitation();
          try{
             incomingUser = userRepo.saveAndFlush(user);
         } catch (Exception e) {

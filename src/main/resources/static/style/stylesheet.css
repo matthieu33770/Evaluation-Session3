@@ -29,3 +29,7 @@ div.signInContext {
 .btn.btn-primary {
     margin-left: 40%;
 }
+
+.alert.alert-success.connected {
+    display: none;
+}

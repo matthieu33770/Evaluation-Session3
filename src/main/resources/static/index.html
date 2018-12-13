@@ -2,84 +2,86 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Evaluation Session 3</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style/stylesheet.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
-        crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<title>Evaluation Session 3</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/stylesheet.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
+	 crossorigin="anonymous">
 </head>
 
 <body>
-    <header class=" jumbotron dark" role="alert">
-        <img src="img/logo-simplon.png" class="logo" alt="simplon.Co">
-        <a href="#" class="logIn right" id="logIn">log in</a>
-        <div></div>
-        <a href="#" class="signIn right" id="signIn">sign in</a>
-    </header>
+	<header id="jumbotron_dark" class=" jumbotron dark" role="alert">
+		<img id="logo" src="img/logo-simplon.png" class="logo" alt="simplon.Co">
+		<a href="#" class="logIn right" id="logIn">log in</a>
+		<div></div>
+		<a href="#" class="signIn right" id="signIn">sign in</a>
+	</header>
 
 
 
-    <div class="isLogIn" id="logInContext">
-        <div class="row justify-content-md-center">
-            <div class="col-sm-6">
-                <div class="card">
-                    <h5 class="card-header">Log In</h5>
-                    <div class="card-body">
-                        <div class="input-group mb-3 logInContext">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">@</span>
-                            </div>
-                            <input id="logEmail" type="text" class="form-control" placeholder="email" aria-label="email"
-                                aria-describedby="basic-addon1">
-                        </div>
-                        <input id="logSubmit" class="btn btn-primary logSubmit" type="submit" value="Submit">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="isLogIn" id="logInContext">
+		<div class="row justify-content-md-center">
+			<div class="col-sm-6">
+				<div class="card">
+					<h5 class="card-header">Log In</h5>
+					<div class="card-body">
+						<div class="input-group mb-3 logInContext">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">@</span>
+							</div>
+							<input id="logEmail" type="text" class="form-control" placeholder="email" aria-label="email" aria-describedby="basic-addon1">
+						</div>
+						<input id="logSubmit" class="btn btn-primary logSubmit" type="submit" value="Submit">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="signInContext" id="signInContext">
-        <div class="row justify-content-md-center">
-            <div class="col-sm-6">
-                <div class="card">
-                    <h5 class="card-header">Sign In</h5>
-                    <div class="card-body">
+	<div class="signInContext" id="signInContext">
+		<div class="row justify-content-md-center">
+			<div class="col-sm-6">
+				<div class="card">
+					<h5 class="card-header">Sign In</h5>
+					<div class="card-body">
 
-                        <div class="input-group mb-3 ">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">nom</span>
-                            </div>
-                            <input id="signNom" type="text" class="form-control" placeholder="nom" aria-label="Username"
-                                aria-describedby="basic-addon1">
-                        </div>
+						<div class="input-group mb-3 ">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">nom</span>
+							</div>
+							<input id="signNom" type="text" class="form-control" placeholder="nom" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
 
-                        <div class="input-group mb-3 ">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">prénom</span>
-                            </div>
-                            <input id="signPrenom" type="text" class="form-control" placeholder="prénom" aria-label="Username"
-                                aria-describedby="basic-addon1">
-                        </div>
+						<div class="input-group mb-3 ">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">prénom</span>
+							</div>
+							<input id="signPrenom" type="text" class="form-control" placeholder="prénom" aria-label="Username"
+							 aria-describedby="basic-addon1">
+						</div>
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">email</span>
-                            </div>
-                            <input id="signEmail" type="text" class="form-control" placeholder="email" aria-label="Username"
-                                aria-describedby="basic-addon1">
-                        </div>
-                        <input id="signSubmit" class="btn btn-primary signSubmit" type="submit" value="Submit">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">email</span>
+							</div>
+							<input id="signEmail" type="text" class="form-control" placeholder="email" aria-label="Username"
+							 aria-describedby="basic-addon1">
+						</div>
+						<input id="signSubmit" class="btn btn-primary signSubmit" type="submit" value="Submit">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <script src="javascript/script.js"></script>
+	<div id="alert-success" class="alert alert-success connected" role="alert">
+		Vous êtes connectés !!!
+	</div>
+
+	<script src="javascript/script.js"></script>
 </body>
 
 </html>

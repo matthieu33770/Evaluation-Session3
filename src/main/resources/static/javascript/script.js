@@ -2,6 +2,7 @@ const signInChoice = document.getElementById("signIn")
 const logInChoice = document.getElementById("logIn")
 const logInContextHtml = document.getElementById("logInContext")
 const signInContextHtml = document.getElementById("signInContext")
+const userContextHtml = document.getElementById("alert-success")
 
 let isAuthenticated = false;
 
@@ -16,6 +17,15 @@ $(document).ready(function () {
     $("#signSubmit").click(function () {
         isSigning()
     })
+    $("#logo").click(function () {
+        console.log("etape 1", window)
+        location.reload()
+
+    })
+    if (isAuthenticated) {
+
+        userContext()
+    }
 
 });
 
@@ -37,6 +47,22 @@ function signInContext() {
 
 }
 
+function userContext() {
+    console.log("starting authContext")
+    signInChoice.style.display = "none"
+    logInChoice.style.display = "none"
+    signInContextHtml.style.display = "none"
+    logInContextHtml.style.display = "none"
+    userContextHtml.style.display = "block"
+    setTimeout(() => {
+        userContextHtml.style.display = "none"
+    },3000)
+    
+    console.log("authContext load ")
+   
+
+}
+
 function isLoging() {
     let user = {}
     let url = "/home/emailLog"
@@ -44,28 +70,30 @@ function isLoging() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: url +"/"+ user["email"],
+        url: url + "/" + user["email"],
         data: JSON.stringify(user),
         dataType: 'json',
         cache: 'false',
         timeout: 60000,
 
         success: function (data) {
-            alert("vous etes connectés")
+            userContext()
             console.log(user)
         }
     })
 }
 
-function isSigning(){
+function isSigning() {
     let user = {}
-    let role = {}
+    let role = {
+        id_role: 27
+    }
     let url = "/home/user"
 
     user["nom"] = $("#signNom").val()
     user["prenom"] = $("#signPrenom").val()
     user["email"] = $("#signEmail").val()
-    user["habilitation"] = "27"
+    //user["habilitation"] = role
 
     $.ajax({
         type: "POST",
