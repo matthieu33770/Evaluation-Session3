@@ -3,10 +3,9 @@ const logInChoice = document.getElementById("logIn")
 const logInContextHtml = document.getElementById("logInContext")
 const signInContextHtml = document.getElementById("signInContext")
 const userContextHtml = document.getElementById("alert-success")
-const tableContextHtml = document.getElementById("userTable")
+const tableContextHtml = document.getElementById("afficheTable")
 
 let isAuthenticated = false;
-let table = $('#usersTable').DataTable();
 
 logInChoice.addEventListener("click", logInContext)
 signInChoice.addEventListener("click", signInContext)
@@ -22,10 +21,9 @@ $(document).ready(function () {
     $("#logo").click(function () {
         console.log("etape 1", window)
         location.reload()
-
+    
     })
     if (isAuthenticated) {
-
         userContext()
     }
 
@@ -35,7 +33,6 @@ function logInContext() {
     console.log("starting logInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
-    tableContextHtml.style.display = "none"
     logInContextHtml.style.display = "block"
     console.log("logInContext load ")
 
@@ -45,7 +42,6 @@ function signInContext() {
     console.log("starting signInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
-    tableContextHtml.style.display = "none"
     signInContextHtml.style.display = "block"
     console.log("signInContext load ")
 
@@ -68,26 +64,35 @@ function userContext() {
 
 function getUsers(){
 	$('#usersTable').DataTable({
-		"columnDefs": [
-	            {
-	                "targets": [ 0 ],
-	                "sortable" : false
-	            },
-	            {
-	                "targets": [ 3 ],
-	                "visible": true
-	            }
-	        ],
-		"ajax" : {
-			url : '/home/isAdmin',
-			dataSrc : ''
-		},
-		"columns" : [ 
-			{"data" : "prenom"},
-			{"data" : "nom"}, 
-			{"data" : "email"},
-			{"data" : "habilitation"} ]
-	});
+		destroy: true,
+        "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "sortable" : true
+                },
+        {
+                    "targets": [ 1 ],
+                    "visible": true
+                },
+        {
+                    "targets": [ 2 ],
+                    "visible": true
+                },
+        {
+                    "targets": [ 3 ],
+                    "visible": true
+                }
+            ],
+        "ajax" : {
+            url : '/home/isAdmin',
+            dataSrc : ''
+        },
+        "columns" : [ 
+            {"data" : "prenom"},
+            {"data" : "nom"}, 
+            {"data" : "email"},
+            {"data" : "habilitation.fonction"} ]
+    });
 }
 
 function isLoging() {
@@ -104,6 +109,7 @@ function isLoging() {
         timeout: 60000,
 
         success: function (data) {
+        	isAuthenticated = true;
             userContext()
             console.log(user)
         }

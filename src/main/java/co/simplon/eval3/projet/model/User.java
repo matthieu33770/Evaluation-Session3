@@ -65,6 +65,30 @@ public class User implements Serializable {
 
 	public Role getHabilitation() {
 		return this.habilitation;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setHabilitation(Role habilitation) {
+		this.habilitation = habilitation;
+	}
+
+	public long getId() {
+		return id;
 	};
 
 }

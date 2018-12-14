@@ -39,18 +39,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userOne);
     }
 
-    @GetMapping(value = "/isAdmin")
+    @RequestMapping(value = "/isAdmin", method = RequestMethod.GET)
     public ResponseEntity<?> allUser() {
-        List<User> users = null;
+        List<User> listeUsers = null;
 
         try {
-            users = userRepo.findAll();
+        	listeUsers = userRepo.findAll();
             
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(users);
+        return ResponseEntity.status(HttpStatus.OK).body(listeUsers);
     }
 
     @PostMapping(value = "/emailLog/{email}")
