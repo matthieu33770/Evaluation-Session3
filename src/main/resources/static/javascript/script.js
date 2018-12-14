@@ -3,17 +3,14 @@ const logInChoice = document.getElementById("logIn")
 const logInContextHtml = document.getElementById("logInContext")
 const signInContextHtml = document.getElementById("signInContext")
 const userContextHtml = document.getElementById("alert-success")
-<<<<<<< Updated upstream
 const tableContextHtml = document.getElementById("userTable")
-
-let isAuthenticated = false;
-let table = $('#usersTable').DataTable();
-=======
 const failContextHtml = document.getElementById("alert-danger")
 const adminContextHtml = document.getElementById("adminContext")
 
+let isAuthenticated = false;
+let table = $('#usersTable').DataTable();
 
->>>>>>> Stashed changes
+
 
 logInChoice.addEventListener("click", logInContext)
 signInChoice.addEventListener("click", signInContext)
@@ -31,13 +28,55 @@ $(document).ready(function () {
 
     })
 
+    function getUsers() {
+        $('#usersTable').DataTable({
+            destroy: true,
+            "columnDefs": [{
+                    "targets": [0],
+                    "sortable": true
+                },
+                {
+                    "targets": [1],
+                    "visible": true
+                },
+                {
+                    "targets": [2],
+                    "visible": true
+                },
+                {
+                    "targets": [3],
+                    "visible": true
+                }
+            ],
+            "ajax": {
+                url: '/home/isAdmin',
+                dataSrc: ''
+            },
+            "columns": [{
+                    "data": "prenom"
+                },
+                {
+                    "data": "nom"
+                },
+                {
+                    "data": "email"
+                },
+                {
+                    "data": "habilitation.fonction"
+                }
+            ]
+
+
+        });
+    }
+    getUsers()
 });
 
 function logInContext() {
     console.log("starting logInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
-    tableContextHtml.style.display = "none"
+    //tableContextHtml.style.display = "none"
     logInContextHtml.style.display = "block"
     console.log("logInContext load ")
 
@@ -47,7 +86,7 @@ function signInContext() {
     console.log("starting signInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
-    tableContextHtml.style.display = "none"
+    //tableContextHtml.style.display = "none"
     signInContextHtml.style.display = "block"
     console.log("signInContext load ")
 
@@ -62,8 +101,8 @@ function userContext() {
     userContextHtml.style.display = "block"
     setTimeout(() => {
         userContextHtml.style.display = "none"
-    },3000)
-    getUsers()
+    }, 3000)
+
     tableContextHtml.style.display = "block"
     console.log("authContext load ")
 }
@@ -73,8 +112,11 @@ function adminContext() {
     logInChoice.style.display = "none"
     logInContextHtml.style.display = "none"
     adminContextHtml.style.display = "block"
+    console.log("etape 1")
     userList()
+    console.log("etape 2")
 
+    console.log("etape 3")
     console.log("adminContext load ")
 }
 
@@ -88,29 +130,9 @@ function isUnknown() {
         signInContextHtml.style.display = "block"
     }, 3000)
 
-function getUsers(){
-	$('#usersTable').DataTable({
-		"columnDefs": [
-	            {
-	                "targets": [ 0 ],
-	                "sortable" : false
-	            },
-	            {
-	                "targets": [ 3 ],
-	                "visible": true
-	            }
-	        ],
-		"ajax" : {
-			url : '/home/isAdmin',
-			dataSrc : ''
-		},
-		"columns" : [ 
-			{"data" : "prenom"},
-			{"data" : "nom"}, 
-			{"data" : "email"},
-			{"data" : "habilitation"} ]
-	});
+
 }
+
 
 function isLoging() {
     let user = {}
@@ -181,17 +203,18 @@ function userList() {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url:"/home/isAdmin",
-        data:{},
+        url: "/home/isAdmin",
+        data: {},
         dataType: "json",
         cache: false,
         timeout: 60000,
-        sucess: function (data) {
-            console.log(data.stringify())
+        sucess: function (e) {
+            console.log(e)
         }
 
     })
 }
+
 /* function getBynom(e) {
 
     var nom = $("#nom".val())
