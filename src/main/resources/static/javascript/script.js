@@ -3,7 +3,7 @@ const logInChoice = document.getElementById("logIn")
 const logInContextHtml = document.getElementById("logInContext")
 const signInContextHtml = document.getElementById("signInContext")
 const userContextHtml = document.getElementById("alert-success")
-const tableContextHtml = document.getElementById("userTable")
+const tableContextHtml = document.getElementById("afficheTable")
 const failContextHtml = document.getElementById("alert-danger")
 const adminContextHtml = document.getElementById("adminContext")
 
@@ -25,7 +25,7 @@ $(document).ready(function () {
     })
     $("#logo").click(function () {
         location.reload()
-
+    
     })
 
     function getUsers() {
@@ -76,7 +76,6 @@ function logInContext() {
     console.log("starting logInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
-    //tableContextHtml.style.display = "none"
     logInContextHtml.style.display = "block"
     console.log("logInContext load ")
 
@@ -129,9 +128,39 @@ function isUnknown() {
     setTimeout(() => {
         signInContextHtml.style.display = "block"
     }, 3000)
-
-
 }
+/* function getUsers(){
+	$('#usersTable').DataTable({
+		destroy: true,
+        "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "sortable" : true
+                },
+        {
+                    "targets": [ 1 ],
+                    "visible": true
+                },
+        {
+                    "targets": [ 2 ],
+                    "visible": true
+                },
+        {
+                    "targets": [ 3 ],
+                    "visible": true
+                }
+            ],
+        "ajax" : {
+            url : '/home/isAdmin',
+            dataSrc : ''
+        },
+        "columns" : [ 
+            {"data" : "prenom"},
+            {"data" : "nom"}, 
+            {"data" : "email"},
+            {"data" : "habilitation.fonction"} ]
+    });
+} */
 
 
 function isLoging() {
@@ -159,9 +188,7 @@ function isLoging() {
                 isUnknown()
 
             }
-        }
-
-    )
+        })
 }
 
 function isSigning() {
