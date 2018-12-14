@@ -33,3 +33,9 @@ div.signInContext {
 .alert.alert-success.connected {
     display: none;
 }
+.alert.alert-danger {
+    display:none;
+}
+div#adminContext.adminContext {
+    display: none;
+}

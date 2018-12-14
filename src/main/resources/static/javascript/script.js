@@ -3,9 +3,23 @@ const logInChoice = document.getElementById("logIn")
 const logInContextHtml = document.getElementById("logInContext")
 const signInContextHtml = document.getElementById("signInContext")
 const userContextHtml = document.getElementById("alert-success")
+<<<<<<< HEAD
 const tableContextHtml = document.getElementById("afficheTable")
 
 let isAuthenticated = false;
+=======
+<<<<<<< Updated upstream
+const tableContextHtml = document.getElementById("userTable")
+
+let isAuthenticated = false;
+let table = $('#usersTable').DataTable();
+=======
+const failContextHtml = document.getElementById("alert-danger")
+const adminContextHtml = document.getElementById("adminContext")
+
+
+>>>>>>> Stashed changes
+>>>>>>> 38135e777a865414ba791287d413afa06f7feedd
 
 logInChoice.addEventListener("click", logInContext)
 signInChoice.addEventListener("click", signInContext)
@@ -19,13 +33,15 @@ $(document).ready(function () {
         isSigning()
     })
     $("#logo").click(function () {
-        console.log("etape 1", window)
         location.reload()
     
     })
+<<<<<<< HEAD
     if (isAuthenticated) {
         userContext()
     }
+=======
+>>>>>>> 38135e777a865414ba791287d413afa06f7feedd
 
 });
 
@@ -61,6 +77,26 @@ function userContext() {
     tableContextHtml.style.display = "block"
     console.log("authContext load ")
 }
+
+function adminContext() {
+    console.log("starting adminContext")
+    logInChoice.style.display = "none"
+    logInContextHtml.style.display = "none"
+    adminContextHtml.style.display = "block"
+    userList()
+
+    console.log("adminContext load ")
+}
+
+function isUnknown() {
+    logInContextHtml.style.display = "none"
+    failContextHtml.style.display = "block"
+    setTimeout(() => {
+        failContextHtml.style.display = "none"
+    }, 3000)
+    setTimeout(() => {
+        signInContextHtml.style.display = "block"
+    }, 3000)
 
 function getUsers(){
 	$('#usersTable').DataTable({
@@ -100,6 +136,7 @@ function isLoging() {
     let url = "/home/emailLog"
     user["email"] = $("#logEmail").val()
     $.ajax({
+<<<<<<< HEAD
         type: "POST",
         contentType: "application/json",
         url: url + "/" + user["email"],
@@ -112,23 +149,47 @@ function isLoging() {
         	isAuthenticated = true;
             userContext()
             console.log(user)
+=======
+            type: "POST",
+            contentType: "application/json",
+            url: url + "/" + user["email"],
+            data: JSON.stringify(user),
+            dataType: 'json',
+            cache: 'false',
+            timeout: 60000,
+
+            success: function (data) {
+                console.log(data)
+                if (data[0].habilitation.fonction == "admin") {
+                    adminContext()
+                } else userContext()
+                console.log(user)
+            },
+
+            error: function (data) {
+                isUnknown()
+
+            }
+>>>>>>> 38135e777a865414ba791287d413afa06f7feedd
         }
-    })
+
+    )
 }
 
 function isSigning() {
     let user = {}
     let role = {
-        id_role: 27
+        fonction: "user",
+        id_role: 2
     }
     let url = "/home/user"
 
     user["nom"] = $("#signNom").val()
     user["prenom"] = $("#signPrenom").val()
     user["email"] = $("#signEmail").val()
-    //user["habilitation"] = role
+    user["habilitation"] = role
 
-    $.ajax({
+    var request = $.ajax({
         type: "POST",
         contentType: "application/json",
         url: url,
@@ -138,8 +199,29 @@ function isSigning() {
         timeout: 60000,
 
         success: function (data) {
-            alert("vous êtes bien enregistré")
+            userContext()
             console.log(data)
+        },
+        error: function (data) {
+
+        }
+
+
+    })
+
+}
+
+function userList() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url:"/home/isAdmin",
+        data:{},
+        dataType: "json",
+        cache: false,
+        timeout: 60000,
+        sucess: function (data) {
+            console.log(data.stringify())
         }
 
     })

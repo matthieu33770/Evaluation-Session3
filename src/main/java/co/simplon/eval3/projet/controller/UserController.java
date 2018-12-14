@@ -76,7 +76,7 @@ public class UserController {
         String nom = user.getNom();
         String prenom = user.getPrenom();   
         String email = user.getEmail();
-        //Role habilitation = user.getHabilitation();
+        Role habilitation = user.getHabilitation();
          try{
             incomingUser = userRepo.saveAndFlush(user);
         } catch (Exception e) {

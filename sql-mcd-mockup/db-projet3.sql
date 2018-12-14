@@ -6,8 +6,8 @@
 # Schema: projet3
 #------------------------------------------------------------
 
-CREATE SCHEMA IF NOT EXISTS `db-projet3`;
-USE `db-projet3`;
+CREATE SCHEMA IF NOT EXISTS `db_projet3`;
+USE `db_projet3`;
 
 #------------------------------------------------------------
 # Table: role
