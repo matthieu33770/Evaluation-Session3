@@ -7,10 +7,7 @@ const tableContextHtml = document.getElementById("afficheTable")
 const failContextHtml = document.getElementById("alert-danger")
 const adminContextHtml = document.getElementById("adminContext")
 
-let isAuthenticated = false;
 let table = $('#usersTable').DataTable();
-
-
 
 logInChoice.addEventListener("click", logInContext)
 signInChoice.addEventListener("click", signInContext)
@@ -112,7 +109,6 @@ function adminContext() {
     logInContextHtml.style.display = "none"
     adminContextHtml.style.display = "block"
     console.log("etape 1")
-    userList()
     console.log("etape 2")
 
     console.log("etape 3")
@@ -129,39 +125,6 @@ function isUnknown() {
         signInContextHtml.style.display = "block"
     }, 3000)
 }
-/* function getUsers(){
-	$('#usersTable').DataTable({
-		destroy: true,
-        "columnDefs": [
-                {
-                    "targets": [ 0 ],
-                    "sortable" : true
-                },
-        {
-                    "targets": [ 1 ],
-                    "visible": true
-                },
-        {
-                    "targets": [ 2 ],
-                    "visible": true
-                },
-        {
-                    "targets": [ 3 ],
-                    "visible": true
-                }
-            ],
-        "ajax" : {
-            url : '/home/isAdmin',
-            dataSrc : ''
-        },
-        "columns" : [ 
-            {"data" : "prenom"},
-            {"data" : "nom"}, 
-            {"data" : "email"},
-            {"data" : "habilitation.fonction"} ]
-    });
-} */
-
 
 function isLoging() {
     let user = {}
@@ -226,23 +189,9 @@ function isSigning() {
 
 }
 
-function userList() {
-    $.ajax({
-        type: "GET",
-        contentType: "application/json",
-        url: "/home/isAdmin",
-        data: {},
-        dataType: "json",
-        cache: false,
-        timeout: 60000,
-        sucess: function (e) {
-            console.log(e)
-        }
 
-    })
-}
-
-/* function getBynom(e) {
+/* je le conserve a titre d'exemple
+function getBynom(e) {
 
     var nom = $("#nom".val())
     e.preventDefault();

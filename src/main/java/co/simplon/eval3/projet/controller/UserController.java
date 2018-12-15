@@ -73,10 +73,6 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody User user) {
         System.out.println("etape1" + user);
         User incomingUser = null ;
-        String nom = user.getNom();
-        String prenom = user.getPrenom();   
-        String email = user.getEmail();
-        Role habilitation = user.getHabilitation();
          try{
             incomingUser = userRepo.saveAndFlush(user);
         } catch (Exception e) {
