@@ -28,4 +28,4 @@ hs_err_pid*
 .gradle/
 bin/
 project/
-*.properties
+src/main/resources/application.properties

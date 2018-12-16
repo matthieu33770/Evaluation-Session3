@@ -29,3 +29,8 @@ div.signInContext {
 .btn.btn-primary {
     margin-left: 40%;
 }
+
+.card.border-secondary.mb-3.text-center {
+    max-width: 20rem;
+}
+

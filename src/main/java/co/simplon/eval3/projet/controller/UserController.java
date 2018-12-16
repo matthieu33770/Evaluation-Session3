@@ -57,8 +57,6 @@ public class UserController {
     public ResponseEntity<?> isExisting(@PathVariable String email) {
 
         List<User> users = null;
-        List<Role> role = null;
-        role = roleRepo.findAll();
         users = userRepo.findByemail(email);
         if (users.size() <= 0) {
             System.out.println("error: email don't exist");

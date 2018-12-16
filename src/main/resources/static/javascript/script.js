@@ -7,7 +7,6 @@ const tableContextHtml = document.getElementById("afficheTable")
 const failContextHtml = document.getElementById("alert-danger")
 const adminContextHtml = document.getElementById("adminContext")
 
-let table = $('#usersTable').DataTable();
 
 logInChoice.addEventListener("click", logInContext)
 signInChoice.addEventListener("click", signInContext)
@@ -22,7 +21,7 @@ $(document).ready(function () {
     })
     $("#logo").click(function () {
         location.reload()
-    
+
     })
 
     function getUsers() {
@@ -66,7 +65,7 @@ $(document).ready(function () {
 
         });
     }
-    getUsers()
+    //getUsers()
 });
 
 function logInContext() {
@@ -82,10 +81,8 @@ function signInContext() {
     console.log("starting signInContext")
     signInChoice.style.display = "none"
     logInChoice.style.display = "none"
-    //tableContextHtml.style.display = "none"
     signInContextHtml.style.display = "block"
     console.log("signInContext load ")
-
 }
 
 function userContext() {
@@ -98,8 +95,6 @@ function userContext() {
     setTimeout(() => {
         userContextHtml.style.display = "none"
     }, 3000)
-
-    tableContextHtml.style.display = "block"
     console.log("authContext load ")
 }
 
@@ -108,10 +103,7 @@ function adminContext() {
     logInChoice.style.display = "none"
     logInContextHtml.style.display = "none"
     adminContextHtml.style.display = "block"
-    console.log("etape 1")
-    console.log("etape 2")
-
-    console.log("etape 3")
+    getAllUsers()
     console.log("adminContext load ")
 }
 
@@ -125,35 +117,40 @@ function isUnknown() {
         signInContextHtml.style.display = "block"
     }, 3000)
 }
-
+/*
+ * requete qui verifie si le params envoyé 
+ * est present en db et selon la reponse recue 
+ * on determine  le role du connecté
+ */
 function isLoging() {
     let user = {}
     let url = "/home/emailLog"
     user["email"] = $("#logEmail").val()
     $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: url + "/" + user["email"],
-            data: JSON.stringify(user),
-            dataType: 'json',
-            cache: 'false',
-            timeout: 60000,
+        type: "POST",
+        contentType: "application/json",
+        url: url + "/" + user["email"],
+        data: JSON.stringify(user),
+        dataType: 'json',
+        cache: 'false',
+        timeout: 60000,
 
-            success: function (data) {
-                console.log(data)
-                if (data[0].habilitation.fonction == "admin") {
-                    adminContext()
-                } else userContext()
-                console.log(user)
-            },
+        success: function (data) {
+            if (data[0].habilitation.fonction == "admin") {
+                adminContext()
+            } else userContext()
+        },
 
-            error: function (data) {
-                isUnknown()
+        error: function (data) {
+            isUnknown()
 
-            }
-        })
+        }
+    })
 }
-
+/*
+ * création d'un nouvel utilisateur
+ *
+ */
 function isSigning() {
     let user = {}
     let role = {
@@ -178,17 +175,99 @@ function isSigning() {
 
         success: function (data) {
             userContext()
-            console.log(data)
         },
         error: function (data) {
 
-        }
-
-
+        }   
     })
 
 }
+/*
+ * recuperé tous les users dans le contexte admin
+ *
+ */
+function getAllUsers() {
+    $.ajax({
+        type: "GET",
+        contentType: "application:json",
+        url: "/home/isAdmin",
+        data: {},
+        dataType: "json",
+        cache: false,
+        timeout: 60000,
+        success: function (data) {
+            const userData = data
+            let i = 0
+            while (i <= userData.length - 1) {
+                userCardCreate(i)
+                paramsUserCardsCreate(i)
+                editUserCard(userData[i], i)
+                i++
+            }
+        }
+    })
+}
 
+/*
+ * creation des "cards" qui recoivent les données users
+ * ici on met en place le html
+ */
+function userCardCreate(i) {
+
+    divCreate("adminContext align-self-center", "div", "container cardUser" + " card-" + (i))
+    divCreate("container cardUser" + " card-" + (i), "div", "row cardUserFormat" + " card-" + (i))
+    divCreate("row cardUserFormat" + " card-" + (i), "div", "col col-sm-6 cardFormat" + " card-" + (i))
+    divCreate("col col-sm-6 cardFormat" + " card-" + (i), "div", "card border-secondary mb-3 text-center" + " card-" + (i))
+    divCreate("card border-secondary mb-3 text-center card-" + i, "div", "card-header user card-" + i, "userId card-" + (i))
+    divCreate("card border-secondary mb-3 text-center" + " card-" + (i), "div", "card-body text-secondary" + " card-" + (i))
+    divCreate("text-secondary" + " card-" + (i), "ul", "list-group list-group-flush" + " card-" + (i))
+}
+/*
+ * petit outil pour faciliter la creation des div qui forment les cards
+ *
+ */
+function divCreate(destClass, BlockType, NewBlockClass, newBlockId) {
+    let dest = document.getElementsByClassName(destClass)
+    let newBlock = document.createElement(BlockType)
+    newBlock.className = NewBlockClass
+    if (newBlockId) {
+        newBlock.id = newBlockId
+    }
+    dest[0].appendChild(newBlock)
+}
+/*
+ * creation des dernieres balises des cards qui  
+ * recevront des données dynamiques
+ */
+function paramsUserCardsCreate(i) {
+    let j = 0
+    while (j <= 2) {
+        let bodyCard = document.getElementsByClassName("list-group-flush" + " card-" + i)
+        let liUser = document.createElement("li")
+        liUser.className = "list-group-item text-center" + " card-" + i
+        if (j == 0) {
+            liUser.id = "userName card-" + i
+        } else if (j == 1) {
+            liUser.id = "userLastName card-" + i
+        } else if (j == 2) {
+            liUser.id = "userEmail card-" + i
+        }
+        bodyCard[0].appendChild(liUser)
+        j++
+    }
+}
+/*
+ * implementation des donnees dynamiques
+ *
+ */
+function editUserCard(data, i) {
+    let idType = ["userName card-" + i, "userLastName card-" + i, "userEmail card-" + i, "userId card-" + i]
+    document.getElementById(idType[0]).innerHTML = data.nom
+    document.getElementById(idType[1]).innerHTML = data.prenom
+    document.getElementById(idType[2]).innerHTML = data.email
+    document.getElementById(idType[3]).innerHTML = `utilisateur : ${data.id}`
+
+}
 
 /* je le conserve a titre d'exemple
 function getBynom(e) {
