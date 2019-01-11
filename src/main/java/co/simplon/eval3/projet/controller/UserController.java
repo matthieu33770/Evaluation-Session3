@@ -2,10 +2,13 @@ package co.simplon.eval3.projet.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +53,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(listeUsers);
+           return ResponseEntity.status(HttpStatus.OK).body(listeUsers);
     }
 
     @PostMapping(value = "/emailLog/{email}")
@@ -78,6 +81,20 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(incomingUser);
 
+    }
+
+    @DeleteMapping(value="/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
+
+
+        try{
+            userRepo.deleteById(new Long(id));
+        }catch(Exception e){
+
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 }

@@ -3,6 +3,7 @@ package co.simplon.eval3.projet.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,10 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.cache.annotation.EnableCaching;
+
 import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
+@EnableCaching()
 public class User implements Serializable {
 
 	// default serial
@@ -40,7 +44,7 @@ public class User implements Serializable {
 	@Column(name = "email")
 	private String email;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name="id_role")
 	private Role habilitation;
 
